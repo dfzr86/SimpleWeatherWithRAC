@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Mantle.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,12 +47,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>37F3DB7DE8CEBCD0FF5CA90363C9A2A4</key>
+		<key>3ECE43584009DB9B5B2E8DA58CA795D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>436DA7727E20EE032566956297CF57C8</key>
+		<key>4E305062071137F7998A80C461791F7F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>55B1C87FB5A6496317A2FF544278636F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DFC1AFC16B27BEE3F3A663F8750B7288</key>
+		<key>887ED41FD5AD2FD8A0A1F0A96AC3EA62</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E39FFBFD9F48F2649BB613B528BF7AFB</key>
+		<key>AE483002B4BF419676E2425B2A97C36D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
