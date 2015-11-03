@@ -42,6 +42,8 @@
 		F9F1DF631BE74DD700686BB1 /* weather-tstorm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9F1DF491BE74DD700686BB1 /* weather-tstorm@2x.png */; settings = {ASSET_TAGS = (); }; };
 		F9F1DF651BE74E6500686BB1 /* Controller.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F1DF641BE74E6500686BB1 /* Controller.storyboard */; settings = {ASSET_TAGS = (); }; };
 		F9F1DF681BE75DC900686BB1 /* SWManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F1DF671BE75DC800686BB1 /* SWManager.m */; settings = {ASSET_TAGS = (); }; };
+		F9F1DF6B1BE75E5600686BB1 /* SWCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F1DF6A1BE75E5600686BB1 /* SWCondition.m */; settings = {ASSET_TAGS = (); }; };
+		F9F1DF6E1BE75E6D00686BB1 /* SWDailyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F1DF6D1BE75E6D00686BB1 /* SWDailyForecast.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,10 @@
 		F9F1DF641BE74E6500686BB1 /* Controller.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Controller.storyboard; sourceTree = "<group>"; };
 		F9F1DF661BE75DC800686BB1 /* SWManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWManager.h; sourceTree = "<group>"; };
 		F9F1DF671BE75DC800686BB1 /* SWManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWManager.m; sourceTree = "<group>"; };
+		F9F1DF691BE75E5600686BB1 /* SWCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCondition.h; sourceTree = "<group>"; };
+		F9F1DF6A1BE75E5600686BB1 /* SWCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCondition.m; sourceTree = "<group>"; };
+		F9F1DF6C1BE75E6D00686BB1 /* SWDailyForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWDailyForecast.h; sourceTree = "<group>"; };
+		F9F1DF6D1BE75E6D00686BB1 /* SWDailyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWDailyForecast.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +190,10 @@
 				F9F1DF2C1BE74CE000686BB1 /* SWController.m */,
 				F9F1DF661BE75DC800686BB1 /* SWManager.h */,
 				F9F1DF671BE75DC800686BB1 /* SWManager.m */,
+				F9F1DF691BE75E5600686BB1 /* SWCondition.h */,
+				F9F1DF6A1BE75E5600686BB1 /* SWCondition.m */,
+				F9F1DF6C1BE75E6D00686BB1 /* SWDailyForecast.h */,
+				F9F1DF6D1BE75E6D00686BB1 /* SWDailyForecast.m */,
 				F9F1DF641BE74E6500686BB1 /* Controller.storyboard */,
 				F9F1DF011BE74B2D00686BB1 /* Assets.xcassets */,
 				F9F1DF061BE74B2D00686BB1 /* Info.plist */,
@@ -451,9 +461,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9F1DF6B1BE75E5600686BB1 /* SWCondition.m in Sources */,
 				F9F1DF2D1BE74CE000686BB1 /* SWController.m in Sources */,
 				F9F1DEFA1BE74B2D00686BB1 /* AppDelegate.m in Sources */,
 				F9F1DEF71BE74B2D00686BB1 /* main.m in Sources */,
+				F9F1DF6E1BE75E6D00686BB1 /* SWDailyForecast.m in Sources */,
 				F9F1DF681BE75DC900686BB1 /* SWManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
