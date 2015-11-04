@@ -8,6 +8,7 @@
 
 #import "SWController.h"
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
+#import "SWManager.h"
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
@@ -29,6 +30,8 @@
     [super viewDidLoad];
 
     [self setupUI];
+    
+    [[SWManager sharedManager] findCurrentLocation];
 }
 
 - (void)setupUI {

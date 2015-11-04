@@ -44,6 +44,7 @@
 		F9F1DF681BE75DC900686BB1 /* SWManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F1DF671BE75DC800686BB1 /* SWManager.m */; settings = {ASSET_TAGS = (); }; };
 		F9F1DF6B1BE75E5600686BB1 /* SWCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F1DF6A1BE75E5600686BB1 /* SWCondition.m */; settings = {ASSET_TAGS = (); }; };
 		F9F1DF6E1BE75E6D00686BB1 /* SWDailyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F1DF6D1BE75E6D00686BB1 /* SWDailyForecast.m */; settings = {ASSET_TAGS = (); }; };
+		F9F3622F1BE85352004A4878 /* SWClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F3622E1BE85352004A4878 /* SWClient.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,8 @@
 		F9F1DF6A1BE75E5600686BB1 /* SWCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCondition.m; sourceTree = "<group>"; };
 		F9F1DF6C1BE75E6D00686BB1 /* SWDailyForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWDailyForecast.h; sourceTree = "<group>"; };
 		F9F1DF6D1BE75E6D00686BB1 /* SWDailyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWDailyForecast.m; sourceTree = "<group>"; };
+		F9F3622D1BE85352004A4878 /* SWClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWClient.h; sourceTree = "<group>"; };
+		F9F3622E1BE85352004A4878 /* SWClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +195,8 @@
 				F9F1DF671BE75DC800686BB1 /* SWManager.m */,
 				F9F1DF691BE75E5600686BB1 /* SWCondition.h */,
 				F9F1DF6A1BE75E5600686BB1 /* SWCondition.m */,
+				F9F3622D1BE85352004A4878 /* SWClient.h */,
+				F9F3622E1BE85352004A4878 /* SWClient.m */,
 				F9F1DF6C1BE75E6D00686BB1 /* SWDailyForecast.h */,
 				F9F1DF6D1BE75E6D00686BB1 /* SWDailyForecast.m */,
 				F9F1DF641BE74E6500686BB1 /* Controller.storyboard */,
@@ -465,6 +470,7 @@
 				F9F1DF2D1BE74CE000686BB1 /* SWController.m in Sources */,
 				F9F1DEFA1BE74B2D00686BB1 /* AppDelegate.m in Sources */,
 				F9F1DEF71BE74B2D00686BB1 /* main.m in Sources */,
+				F9F3622F1BE85352004A4878 /* SWClient.m in Sources */,
 				F9F1DF6E1BE75E6D00686BB1 /* SWDailyForecast.m in Sources */,
 				F9F1DF681BE75DC900686BB1 /* SWManager.m in Sources */,
 			);
