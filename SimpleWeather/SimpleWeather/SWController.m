@@ -9,6 +9,7 @@
 #import "SWController.h"
 #import <LBBlurredImage/UIImageView+LBBlurredImage.h>
 #import "SWManager.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
@@ -22,9 +23,23 @@
 
 @property (nonatomic, assign) CGFloat screenHeight;
 
+@property (nonatomic, strong) NSDateFormatter *hourlyFormatter;
+@property (nonatomic, strong) NSDateFormatter *dailyFormatter;
+
 @end
 
 @implementation SWController
+
+- (id)init {
+    if (self = [super init]) {
+        _hourlyFormatter = [[NSDateFormatter alloc] init];
+        _hourlyFormatter.dateFormat = @"h a";
+        
+        _dailyFormatter = [[NSDateFormatter alloc] init];
+        _dailyFormatter.dateFormat = @"EEEE";
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -104,6 +119,37 @@
     iconView.contentMode = UIViewContentModeScaleAspectFit; 
     iconView.backgroundColor = [UIColor clearColor]; 
     [header addSubview:iconView];
+    
+    [[RACObserve([SWManager sharedManager], currentCondition)
+      deliverOn:RACScheduler.mainThreadScheduler]
+     subscribeNext:^(SWCondition *newCondition) {
+         temperatureLabel.text = [NSString stringWithFormat:@"%.0f°",newCondition.temperature.floatValue];
+         conditionsLabel.text = [newCondition.condition capitalizedString];
+         cityLabel.text = [newCondition.locationName capitalizedString];
+         
+         iconView.image = [UIImage imageNamed:[newCondition imageName]];
+     }];
+    RAC(hiloLabel, text) = [[RACSignal combineLatest:@[
+                                                       // 2
+                                                       RACObserve([SWManager sharedManager], currentCondition.tempHigh),
+                                                       RACObserve([SWManager sharedManager], currentCondition.tempLow)]
+                             // 3
+                                              reduce:^(NSNumber *hi, NSNumber *low) {
+                                                  return [NSString  stringWithFormat:@"%.0f° / %.0f°",hi.floatValue,low.floatValue];
+                                              }]
+                            // 4
+                            deliverOn:RACScheduler.mainThreadScheduler];
+    [[RACObserve([SWManager sharedManager], hourlyForecast)
+      deliverOn:RACScheduler.mainThreadScheduler]
+     subscribeNext:^(NSArray *newForecast) {
+         [self.tableView reloadData];
+     }];
+    
+    [[RACObserve([SWManager sharedManager], dailyForecast)
+      deliverOn:RACScheduler.mainThreadScheduler]
+     subscribeNext:^(NSArray *newForecast) {
+         [self.tableView reloadData];
+     }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -117,8 +163,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //TODO: 
-    return 0;
+    
+    if (section == 0) {
+        return MIN([[SWManager sharedManager].hourlyForecast count], 6) + 1;
+    }
+    // 2
+    return MIN([[SWManager sharedManager].dailyForecast count], 6) + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -135,19 +185,78 @@
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.textColor = [UIColor whiteColor];
     
+    if (indexPath.section == 0) {
+        // 1
+        if (indexPath.row == 0) {
+            [self configureHeaderCell:cell title:@"Hourly Forecast"];
+        }
+        else {
+            // 2
+            SWManager *weather = [SWManager sharedManager].hourlyForecast[indexPath.row - 1];
+            [self configureHourlyCell:cell weather:weather];
+        }
+    }
+    else if (indexPath.section == 1) {
+        // 1
+        if (indexPath.row == 0) {
+            [self configureHeaderCell:cell title:@"Daily Forecast"];
+        }
+        else {
+            // 3
+            SWManager *weather = [SWManager sharedManager].dailyForecast[indexPath.row - 1];
+            [self configureDailyCell:cell weather:weather]; 
+        } 
+    }
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    NSInteger cellCount = [self tableView:tableView numberOfRowsInSection:indexPath.section];
+    return self.screenHeight / (CGFloat)cellCount;
 }
 
+// 1
+- (void)configureHeaderCell:(UITableViewCell *)cell title:(NSString *)title {
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.text = title;
+    cell.detailTextLabel.text = @"";
+    cell.imageView.image = nil;
+}
 
+// 2
+- (void)configureHourlyCell:(UITableViewCell *)cell weather:(SWCondition *)weather {
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.text = [self.hourlyFormatter stringFromDate:weather.date];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f°",weather.temperature.floatValue];
+    cell.imageView.image = [UIImage imageNamed:[weather imageName]];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+}
 
+// 3
+- (void)configureDailyCell:(UITableViewCell *)cell weather:(SWCondition *)weather {
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.text = [self.dailyFormatter stringFromDate:weather.date];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f° / %.0f°",
+                                 weather.tempHigh.floatValue,
+                                 weather.tempLow.floatValue];
+    cell.imageView.image = [UIImage imageNamed:[weather imageName]];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+}
 
+#pragma mark - UIScrollViewDelegate
 
-
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // 1
+    CGFloat height = scrollView.bounds.size.height;
+    CGFloat position = MAX(scrollView.contentOffset.y, 0.0);
+    // 2
+    CGFloat percent = MIN(position / height, 1.0);
+    // 3
+    self.blurredImageView.alpha = percent;
+}
 
 
 
